@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect,useState}  from "react";
 //import NoImages from "./NoImages";
 //import Image from "./Image";
 import Deck from "./Deck";
@@ -17,27 +17,34 @@ const Gallery = props => {
       onClick={() => this.props.onClick(i)}/>);
   }
   */
- const renderDeckPreview = (src,title) => {
-  console.log(src);
-  return (
-    <Deck src={src} alt={title} onClick={props.togglePop(props.id)}/>
-  );
-};
+  console.log('yeah9')
+  console.log(props.seen);
+  const renderDeckPreview = (src,title,deck) => {
+    console.log(src);
+    return (
+      <Deck src={src} alt={title} onClick={props.togglePop(deck)}/>
+    );
+  };
+
+  const [decks,setDecks] = useState([]);
+  const [noDecks, setnoDecks] = useState(0);
+
+  useEffect(() => {
+    let deckNum = 20;
+    let data = [...Array(deckNum).keys()];
+    console.log(data);
+    //let previewPath = '../no-preview-available.png'; # gitlab
+    setDecks(data.map(
+      deck => {
+        let src = previewPath;
+        let title = `preview_${deck}`;
+        return renderDeckPreview(src,title,deck);
+      }
+    ));
+    setnoDecks(data.length);
+  },[])
 
 
-  let deckNum = 20;
-  let data = [...Array(deckNum).keys()];
-  console.log(data);
-  //let previewPath = '../no-preview-available.png'; # gitlab
-  let decks = data.map(
-    deck => {
-      let src = previewPath;
-      let title = `preview_${deck}`;
-      return renderDeckPreview(src,title);
-    }
-  );
-      
-  let noDecks;
 /*
   const results = props.data;
   let images;
@@ -60,8 +67,14 @@ const Gallery = props => {
   return (
     <div className='photo-container'>
       <ul>{decks}</ul>
+      {console.log('yeah2')}
+      {console.log(props.seen)}
       {props.seen ? <PopUp toggle={props.togglePop} id={props.id}/> : null}
+      {console.log('yeah3')}
+      {console.log(props.seen)}
       {noDecks}
+      {console.log('yeah7')}
+      {console.log(props.seen)}
     </div>
   );
 };

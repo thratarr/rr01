@@ -12,21 +12,27 @@ class App extends Component {
   };
 
   togglePop = (i) => {
-    this.setState({
+    console.log('hehe')
+    return(this.setState({
       seen: !this.state.seen,
       id: this.state.seen ? null:i,
-    })};
+    }));};
 
   render() {
     return (
       <div className="App">
+        {console.log(this.state.seen)} 
         <Header/>
-        <Form/>
+       {console.log(!this.state.seen)} 
+       <Form/>
+        {console.log(this.state.seen)}
         <Gallery togglePop={this.togglePop} seen={this.state.seen} id={this.state.id}/>
         
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        {console.log('yeah4')}
+        {console.log(this.state.seen)}
       </div>
     );
   }

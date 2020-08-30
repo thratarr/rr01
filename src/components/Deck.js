@@ -4,7 +4,9 @@ const Deck = props => {
     //let previewPath = '../no-preview-available.png';
     return (
         <li>
-            <button> <img src={props.src} alt={props.alt} /*onClick={props.onClick}*/ /> </button>
+            {console.log('yeah5')}
+            <button /*onClick={props.onClick}*/> <img src={props.src} alt={props.alt}  /> </button>
+            {console.log('yeah6')}
         </li>
     );
 };
