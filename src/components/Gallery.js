@@ -1,15 +1,39 @@
-import React, {useEffect,useState}  from "react";
+import React, { useEffect, useState, setState } from "react";
 //import NoImages from "./NoImages";
 //import Image from "./Image";
 import Deck from "./Deck";
 import PopUp from "./PopUp";
-import previewPath from '../no-preview-available.png'
+import previewPath from "../no-preview-available.png";
+import DeckModal from "./DeckModal";
 
+const Gallery = (sent) => {
+  const {seen,handleSeen,id,handleId,show,handleClose,handleShow} = sent;
 
-
-const Gallery = props => {
-  
-
+  const togglePop = (i) => {
+    console.log("hehe");
+    console.log("i=", i, "id=", id,"seen",seen);
+    console.log("isTrue? = ", id === null);
+      handleSeen();
+      handleId(i);
+      handleShow();
+    // if (id === -1) {
+    //   console.log("if i =", i);
+    //   return(
+    //   setSeen(!seen),
+    //   setId(i),
+    //   handleShow()
+    //   );
+    // } else if (i === id) {
+    //   console.log("else if");
+    //   return(
+    //   setSeen(!seen),
+    //   setId(-1),
+    //   handleClose()
+    //   );
+    // }
+    console.log("after i=", i, "id=", id,"seen",seen);
+    // return;
+  };
   /*
   renderSquare(i) {
     return (<Square
@@ -17,35 +41,33 @@ const Gallery = props => {
       onClick={() => this.props.onClick(i)}/>);
   }
   */
-  console.log('yeah9')
-  console.log(props.seen);
-  const renderDeckPreview = (src,title,deck) => {
+  //console.log('yeah9')
+  //console.log(props.seen);
+  const renderDeckPreview = (src, title, deck) => {
     console.log(src);
-    return (
-      <Deck src={src} alt={title} onClick={props.togglePop(deck)}/>
-    );
+    return <Deck src={src} alt={title} onClick={() => togglePop(deck)} />;
   };
 
-  const [decks,setDecks] = useState([]);
+  const [decks, setDecks] = useState([]);
   const [noDecks, setnoDecks] = useState(0);
 
   useEffect(() => {
+
     let deckNum = 20;
     let data = [...Array(deckNum).keys()];
-    console.log(data);
+    console.log("data", data);
     //let previewPath = '../no-preview-available.png'; # gitlab
-    setDecks(data.map(
-      deck => {
+    setDecks(
+      data.map((deck) => {
         let src = previewPath;
         let title = `preview_${deck}`;
-        return renderDeckPreview(src,title,deck);
-      }
-    ));
+        return renderDeckPreview(src, title, deck);
+      })
+    );
     setnoDecks(data.length);
-  },[])
+  }, []);
 
-
-/*
+  /*
   const results = props.data;
   let images;
   let noImages;
@@ -65,16 +87,13 @@ const Gallery = props => {
   }
   */
   return (
-    <div className='photo-container'>
+    <div className="photo-container">
       <ul>{decks}</ul>
-      {console.log('yeah2')}
-      {console.log(props.seen)}
-      {props.seen ? <PopUp toggle={props.togglePop} id={props.id}/> : null}
-      {console.log('yeah3')}
-      {console.log(props.seen)}
+      {console.log("before popUp", seen)}
+      {console.log("show = ", show,"seen = ",seen,"id=",id)}
+      {seen ? <PopUp toggle={() => togglePop()} id={id} /> : null}
       {noDecks}
-      {console.log('yeah7')}
-      {console.log(props.seen)}
+      <DeckModal id={id} handleClose={() => handleClose()} show={show} />
     </div>
   );
 };

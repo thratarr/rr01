@@ -7,13 +7,13 @@ export default class PopUp extends Component {
 
   render() {
     return (
-      <div className="modal">
-        <div className="modal_content">
+      <div>
+        <div>
           <span className="close" onClick={this.handleClick}>
             &times;
           </span>
           <form>
-            <h3>Register!</h3>
+            <h3>current deck = no. {this.props.id}</h3>
             <label>
               Name:
               <input type="text" name="name" />

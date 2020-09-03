@@ -1,41 +1,25 @@
-import React, { Component } from 'react';
+import React, {useState,setState} from 'react';
 //import logo from './logo.svg';
 import Header from './components/Header'
 import Form from './components/Form'
 import Gallery from './components/Gallery'
 import './App.css';
 
-class App extends Component {
-  state = {
-    seen: false,
-    id: null,
-  };
-
-  togglePop = (i) => {
-    console.log('hehe')
-    return(this.setState({
-      seen: !this.state.seen,
-      id: this.state.seen ? null:i,
-    }));};
-
-  render() {
+const App = () => {
     return (
+      
       <div className="App">
-        {console.log(this.state.seen)} 
+        {console.log('render')} 
         <Header/>
-       {console.log(!this.state.seen)} 
        <Form/>
-        {console.log(this.state.seen)}
-        <Gallery togglePop={this.togglePop} seen={this.state.seen} id={this.state.id}/>
+        <Gallery/>
         
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        {console.log('yeah4')}
-        {console.log(this.state.seen)}
       </div>
     );
-  }
+
 }
 
 export default App;
